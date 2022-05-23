@@ -1,7 +1,7 @@
 // Require the necessary discord.js classes
 const { Client, Intents } = require('discord.js')
 require('dotenv').config()
-const Functions = require('./Functions')
+const listener = require('./listener')
 
 // Create a new client instance
 const client = new Client({
@@ -14,27 +14,8 @@ client.once('ready', () => {
 })
 
 // respond to message
-client.on('messageCreate', (msg) => {
-  if (msg.author.bot) return
-
-  switch (msg.content) {
-    case 'hello':
-      msg.channel.send(`Hello ${msg.author.username}`)
-      break
-    case 'ping':
-      msg
-        .reply('pong')
-        .then((msg) => {
-          setTimeout(() => msg.delete(), 5000)
-        })
-        .then(console.log('We just got pinged!!!'))
-      break
-    case '$inspire':
-      Functions.getQuote().then((quote) => msg.channel.send(quote))
-      break
-    default:
-      break
-  }
+client.on('messageCreate', (message) => {
+  listener.onMessage(message)
 })
 
 // Login to Discord with your client's token
