@@ -1,7 +1,7 @@
 // Require the necessary discord.js classes
 const { Client, Intents } = require('discord.js')
-const fetch = require('node-fetch')
 require('dotenv').config()
+const Functions = require('./Functions')
 
 // Create a new client instance
 const client = new Client({
@@ -12,17 +12,6 @@ const client = new Client({
 client.once('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`)
 })
-
-// Get random quote
-function getQuote() {
-  return fetch('https://zenquotes.io/api/random')
-    .then((res) => {
-      return res.json()
-    })
-    .then((data) => {
-      return data[0]['q'] + ' -' + data[0]['a']
-    })
-}
 
 // respond to message
 client.on('messageCreate', (msg) => {
@@ -41,7 +30,7 @@ client.on('messageCreate', (msg) => {
         .then(console.log('We just got pinged!!!'))
       break
     case '$inspire':
-      getQuote().then((quote) => msg.channel.send(quote))
+      Functions.getQuote().then((quote) => msg.channel.send(quote))
       break
     default:
       break
