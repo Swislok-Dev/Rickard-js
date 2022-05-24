@@ -1,5 +1,5 @@
 const Functions = require('./Functions')
-function onMessage(message) {
+function onMessage(message, client) {
   if (message.author.bot) return
 
   message.content = message.content.toLowerCase()
@@ -9,7 +9,7 @@ function onMessage(message) {
       break
     case '$ping':
       message
-        .reply('pong')
+        .reply(Functions.getPing(message))
         .then((message) => {
           setTimeout(() => message.delete(), 5000)
         })

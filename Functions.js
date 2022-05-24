@@ -11,6 +11,13 @@ function getQuote() {
     })
 }
 
+function getPing(message) {
+  let latency = `Latency is ${message.createdTimestamp - Date.now()}ms.`
+  console.log(`Latency is ${message.createdTimestamp - Date.now()}ms.`)
+  return latency
+}
+
 module.exports = {
   getQuote,
+  getPing,
 }
