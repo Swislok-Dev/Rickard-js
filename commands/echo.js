@@ -11,6 +11,9 @@ module.exports = {
         .setRequired(true)
     ),
   async execute(interaction) {
-    await interaction.reply({ content: interaction.options.getString('input') , ephemeral: true })
+    await interaction.reply({
+      content: interaction.options.getString('input'),
+      ephemeral: true,
+    })
   },
 }
